@@ -8,17 +8,20 @@ class Home extends Component {
   constructor() {
     super();
     this.state = {
-      newsData: []
+      newsData: store.getState()
     }
+
+    store.subscribe(() => {
+      const newList = store.getState();
+      this.setState({
+        newsData: newList
+      })
+    })
   }
 
   componentDidMount() {
     const country = this.props.match.params.country || 'us';
     this.fetchNewsData(country);
-    store.dispatch({
-      type: 'LOAD_NEWS',
-      payload: country
-    })
   }
   
   componentWillReceiveProps(props) {
@@ -30,7 +33,12 @@ class Home extends Component {
     axios.get(`https://newsapi.org/v2/top-headlines?country=${country}&apiKey=8750ab3a273a48de9dd3010c912439e0`)
       .then(response => {
         const articles = response.data.articles;
-        this.setState({ newsData: articles })
+
+        store.dispatch({
+          type: 'LOAD_NEWS',
+          payload: articles
+        })
+        this.setState({ newsData: store.getState() })
       })
       .catch(err => console.log(err));
   }
@@ -38,7 +46,6 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <h1>Home</h1>
         <div className="flex-container">
           {
             this.state.newsData.map((news, i) => (
