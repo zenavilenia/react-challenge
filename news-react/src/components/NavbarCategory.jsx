@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
+import './Home.css';
 
 class NavbarCategory extends React.Component {
   render () {
@@ -7,21 +8,21 @@ class NavbarCategory extends React.Component {
       <nav>
         <ul>
           <li>
-            <Link to="/us" onClick={ () => this.props.getNewsArs('ars-technica') }>
+            <Link to="/us">
                 <span>
                   US
                 </span>
             </Link>
           </li>
           <li>
-            <Link to="/kr" onClick={ () => this.props.getNewsArs('ign') }>
+            <Link to="/kr">
                 <span>
                   KR
                 </span>
             </Link>
           </li>
           <li>
-            <Link to="/hk" onClick={ () => this.props.getNewsArs('reddit-r-all') }>
+            <Link to="/hk">
                 <span>
                   HK
                 </span>

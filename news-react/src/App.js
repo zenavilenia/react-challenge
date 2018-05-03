@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
+import './components/Navbar.css';
 
-import Navbar from './components/Navbar';
+
+import NavbarCategory from './components/NavbarCategory';
 import Home from './components/Home';
 
 class App extends Component {
@@ -10,7 +12,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Navbar/>
+          <NavbarCategory/>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/:country" component={Home} />
