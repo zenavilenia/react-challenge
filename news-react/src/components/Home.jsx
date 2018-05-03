@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import React, { Component } from 'react';
 import './Home.css';
+import { newList } from '../store/news/action'
 
 class Home extends Component {
   constructor() {
@@ -37,8 +39,9 @@ class Home extends Component {
             this.props.getList.map((news, i) => (
               <div className="flex-items news" key={ i }>
                 <img src={ news.urlToImage } className="news-image" alt={ news.title }/>
-                <div className="news-title">Title: { news.title }</div>
+                <div className="news-title">{ news.title }</div>
                 <div>{ news.description }</div>
+                <a href={ news.url } target="__blank" class="button">Show Article</a>
               </div>
             ))
           }
@@ -49,14 +52,11 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  getList: state
+  getList: state.news
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  newList: (news) => dispatch({
-    type: 'LOAD_NEWS',
-    payload: news
-  })
-})
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  newList
+}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

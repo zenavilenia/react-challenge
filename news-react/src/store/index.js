@@ -1,13 +1,9 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
+import newsList from './news/reducers';
 
-const reducers = (state = [], action) => {
-  switch(action.type) {
-    case 'LOAD_NEWS':
-      return action.payload;
-    default:
-      return state;
-  }
-}
+const reducers = combineReducers({
+  news: newsList
+})
 
 const store = createStore(reducers);
 
