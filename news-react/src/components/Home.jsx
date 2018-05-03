@@ -7,7 +7,6 @@ class Home extends Component {
   constructor() {
     super();
     this.state = {
-      newsData: []
     }
   }
 
@@ -26,9 +25,6 @@ class Home extends Component {
       .then(response => {
         const articles = response.data.articles;
         this.props.newList(articles)
-        this.setState({
-          newsData: this.props.getList
-        })
       })
       .catch(err => console.log(err));
   }
@@ -38,7 +34,7 @@ class Home extends Component {
       <div>
         <div className="flex-container">
           {
-            this.state.newsData.map((news, i) => (
+            this.props.getList.map((news, i) => (
               <div className="flex-items news" key={ i }>
                 <img src={ news.urlToImage } className="news-image" alt={ news.title }/>
                 <div className="news-title">Title: { news.title }</div>
