@@ -1,22 +1,14 @@
 import axios from 'axios';
-
+import { connect } from 'react-redux'
 import React, { Component } from 'react';
 import './Home.css';
-import store from '../store/index.js';
 
 class Home extends Component {
   constructor() {
     super();
     this.state = {
-      newsData: store.getState()
+      newsData: []
     }
-
-    store.subscribe(() => {
-      const newList = store.getState();
-      this.setState({
-        newsData: newList
-      })
-    })
   }
 
   componentDidMount() {
@@ -33,12 +25,10 @@ class Home extends Component {
     axios.get(`https://newsapi.org/v2/top-headlines?country=${country}&apiKey=8750ab3a273a48de9dd3010c912439e0`)
       .then(response => {
         const articles = response.data.articles;
-
-        store.dispatch({
-          type: 'LOAD_NEWS',
-          payload: articles
+        this.props.newList(articles)
+        this.setState({
+          newsData: this.props.getList
         })
-        this.setState({ newsData: store.getState() })
       })
       .catch(err => console.log(err));
   }
@@ -62,4 +52,15 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => ({
+  getList: state
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  newList: (news) => dispatch({
+    type: 'LOAD_NEWS',
+    payload: news
+  })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
