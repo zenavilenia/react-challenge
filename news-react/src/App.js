@@ -6,6 +6,7 @@ import './components/Navbar.css';
 
 import NavbarCategory from './components/NavbarCategory';
 import Home from './components/Home';
+import Login from './components/Login';
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
         <div className="App">
           <NavbarCategory/>
           <Switch>
+            <Route exact path="/login" component={Login} />
             <Route exact path="/" component={Home} />
             <Route exact path="/:country" component={Home} />
           </Switch>

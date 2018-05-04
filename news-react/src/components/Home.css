@@ -1,26 +1,3 @@
-.flex-container {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.news {
-  text-align: left; 
-  border:1px solid black;
-  padding: 5px;
-  margin: 8px;
-  max-width: 250px;
-}
-
-.news-title {
-  font-size: large;
-  font-weight:bold;
-}
-
-.news-image {
-  width:100%;
-  height:auto;
-}
-
 a.button {
   -webkit-appearance: button;
   -moz-appearance: button;
@@ -28,4 +5,31 @@ a.button {
 
   text-decoration: none;
   color: initial;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid black;
+  width: 70px;
+  height: 70px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

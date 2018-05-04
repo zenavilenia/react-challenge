@@ -1,0 +1,22 @@
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.news {
+  text-align: left; 
+  border:1px solid black;
+  padding: 5px;
+  margin: 8px;
+  max-width: 250px;
+}
+
+.news-title {
+  font-size: large;
+  font-weight:bold;
+}
+
+.news-image {
+  width:100%;
+  height:auto;
+}

@@ -1,9 +1,10 @@
-import axios from 'axios';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import React, { Component } from 'react';
+
 import './Home.css';
-import { newList } from '../store/news/action'
+import { getNews } from '../store/news/action'
+import Articles from './Articles'
 
 class Home extends Component {
   constructor() {
@@ -13,41 +14,18 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    const country = this.props.match.params.country || 'us';
-    this.fetchNewsData(country);
-  }
-  
-  componentWillReceiveProps(props) {
-    const country = props.match.params.country
-    this.fetchNewsData(country);
-  }
-
-  fetchNewsData(country) {
-    axios.get(`https://newsapi.org/v2/top-headlines?country=${country}&apiKey=8750ab3a273a48de9dd3010c912439e0`)
-      .then(response => {
-        const articles = response.data.articles;
-        this.props.newList(articles)
-      })
-      .catch(err => console.log(err));
+    this.props.getNews('us')
   }
 
   render() {
-    return (
-      <div>
-        <div className="flex-container">
-          {
-            this.props.getList.map((news, i) => (
-              <div className="flex-items news" key={ i }>
-                <img src={ news.urlToImage } className="news-image" alt={ news.title }/>
-                <div className="news-title">{ news.title }</div>
-                <div>{ news.description }</div>
-                <a href={ news.url } target="__blank" class="button">Show Article</a>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    );
+    let { data, loading, error } = this.props.getList;
+    if(loading) {
+      return <div class="loader"></div>
+    } else if (error.status) {
+      return <h1>Oops! Something error: { error.message } </h1>
+    } else {
+      return <Articles data={ data }/>
+    }
   }
 }
 
@@ -56,7 +34,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  newList
+  getNews
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
