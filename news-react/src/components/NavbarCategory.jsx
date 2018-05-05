@@ -10,6 +10,7 @@ class NavbarCategory extends React.Component {
   changeLanguage(country) {
     this.props.getNews(country)
   }
+  
   render () {
     return (
       <nav>

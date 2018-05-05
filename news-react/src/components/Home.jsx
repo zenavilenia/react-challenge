@@ -1,5 +1,5 @@
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import React, { Component } from 'react';
 
 import './Home.css';
@@ -19,8 +19,9 @@ class Home extends Component {
 
   render() {
     let { data, loading, error } = this.props.getList;
+    // const token = localStorage.getItem('token');
     if(loading) {
-      return <div class="loader"></div>
+      return <div className="loader"></div>
     } else if (error.status) {
       return <h1>Oops! Something error: { error.message } </h1>
     } else {

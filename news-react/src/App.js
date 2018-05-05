@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import './components/Navbar.css';
-
 
 import NavbarCategory from './components/NavbarCategory';
 import Home from './components/Home';
 import Login from './components/Login';
+import Register from './components/Register';
 
 class App extends Component {
   render() {
@@ -16,8 +16,25 @@ class App extends Component {
           <NavbarCategory/>
           <Switch>
             <Route exact path="/login" component={Login} />
-            <Route exact path="/" component={Home} />
-            <Route exact path="/:country" component={Home} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/" render={
+              (props => {
+                if (localStorage.token) {
+                  return <Home props={props} />
+                } else {
+                  return <Redirect to="/login"/>
+                }
+              })
+            } />
+            <Route exact path="/:country" render={
+              (props => {
+                if (localStorage.token) {
+                  return <Home props={props} />
+                } else {
+                  return <Redirect to="/login"/>
+                }
+              })
+            } />
           </Switch>
         </div>
       </Router>

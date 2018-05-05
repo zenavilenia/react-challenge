@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import './Login.css';
-import { signin } from '../store/user/action'
+import { signup } from '../store/user/action'
 
-class Login extends Component {
+class Register extends Component {
   constructor() {
     super();
     this.state = {
@@ -23,12 +23,13 @@ class Login extends Component {
     })
   }
 
-  login() {
-    this.props.signin({ ...this.state })
+  register() {
+    this.props.signup({ ...this.state })
+    
   }
 
-  toRegister() {
-    this.props.history.push('/register');
+  toLogin() {
+    this.props.history.push('/login');
   }
 
   render() {
@@ -44,15 +45,15 @@ class Login extends Component {
       } else {
         return (
           <div>
-            <form onSubmit={(e) => {this.login(); e.preventDefault();}}>
+            <form onSubmit={(e) => {this.register(); e.preventDefault();}}>
               <div className="container">
                 <label><b>Email</b></label>
                 <input type="text" placeholder="Enter your email" name="email" value={ this.state.email } onChange={ this.handleChange } required/>
                 <label><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="password" value={ this.state.password } onChange={ this.handleChange } required/>
-                <button type="submit">Login</button>
+                <button type="submit">Register</button>
                 <hr/>
-                <a href="" onClick={ () => { this.toRegister(); }}>Don't have account? Register here</a>
+                <a href="" onClick={ () => { this.toLogin(); }}>Already have account? Login here</a>
               </div>
             </form>
           </div>
@@ -67,7 +68,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  signin
+  signup
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
