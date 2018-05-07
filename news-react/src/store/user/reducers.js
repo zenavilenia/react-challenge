@@ -2,7 +2,8 @@ import {
   SIGN_IN_PENDING,
   SIGN_IN_SUCCESS,
   SIGN_IN_ERROR,
-  ADD_NEWS
+  ADD_NEWS,
+  DELETE_NEWS
 } from './action.type'
 
 const initialState = {
@@ -25,6 +26,12 @@ const user = (state = { ...initialState }, action) => {
       return ({
         ...state,
         news: [...state.news, action.payload]
+      })
+    case DELETE_NEWS:
+      var removed = state.news.filter((news, i) => i !== action.payload)
+      return ({
+        ...state,
+        news: removed
       })
     case SIGN_IN_PENDING:
       return ({

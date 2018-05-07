@@ -4,7 +4,8 @@ import {
   SIGN_IN_PENDING,
   SIGN_IN_SUCCESS,
   SIGN_IN_ERROR,
-  ADD_NEWS
+  ADD_NEWS,
+  DELETE_NEWS
 } from './action.type'
 
 export const signup = (objUser) => {
@@ -26,6 +27,12 @@ export const signup = (objUser) => {
 export const addNews = (news) => {
   return dispatch => {
     dispatch(addNewNews(news));
+  }
+}
+
+export const deleteNews = (index) => {
+  return dispatch => {
+    dispatch(deleteThisNews(index));
   }
 }
 
@@ -52,6 +59,11 @@ export const signin = (objUser) => {
 const addNewNews = (news) => ({
   type: ADD_NEWS,
   payload: news
+})
+
+const deleteThisNews = (index) => ({
+  type: DELETE_NEWS,
+  payload: index
 })
 
 const signinSuccess = (articles) => ({

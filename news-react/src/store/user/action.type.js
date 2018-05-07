@@ -7,3 +7,4 @@ export const SIGN_IN_SUCCESS = 'SIGN_IN SUCCESS';
 export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
 
 export const ADD_NEWS = 'ADD_NEWS';
+export const DELETE_NEWS = 'DELETE_NEWS';
