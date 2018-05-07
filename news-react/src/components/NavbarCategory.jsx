@@ -10,6 +10,11 @@ class NavbarCategory extends React.Component {
   changeLanguage(country) {
     this.props.getNews(country)
   }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('iduser');
+  }
   
   render () {
     return (
@@ -33,6 +38,20 @@ class NavbarCategory extends React.Component {
             <Link to="/hk" onClick={ this.changeLanguage.bind(this, 'hk') }>
                 <span>
                   HK
+                </span>
+            </Link>
+          </li>
+          <li class="right">
+            <Link to="/login" onClick={ this.logout.bind(this, null) }>
+              <span>
+                Logout
+              </span>
+            </Link>
+          </li>
+          <li class="right">
+            <Link to="/myfavorite">
+                <span>
+                  My Favorite
                 </span>
             </Link>
           </li>

@@ -7,6 +7,7 @@ import NavbarCategory from './components/NavbarCategory';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
+import MyFavorite from './components/MyFavorite';
 
 class App extends Component {
   render() {
@@ -21,6 +22,15 @@ class App extends Component {
               (props => {
                 if (localStorage.token) {
                   return <Home props={props} />
+                } else {
+                  return <Redirect to="/login"/>
+                }
+              })
+            } />
+            <Route exact path="/myfavorite" render={
+              (props => {
+                if (localStorage.token) {
+                  return <MyFavorite props={props} />
                 } else {
                   return <Redirect to="/login"/>
                 }

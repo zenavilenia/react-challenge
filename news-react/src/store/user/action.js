@@ -3,7 +3,8 @@ import axios from 'axios';
 import {
   SIGN_IN_PENDING,
   SIGN_IN_SUCCESS,
-  SIGN_IN_ERROR
+  SIGN_IN_ERROR,
+  ADD_NEWS
 } from './action.type'
 
 export const signup = (objUser) => {
@@ -19,6 +20,12 @@ export const signup = (objUser) => {
         alert('Register failed!')
         console.error(err)
       })
+  }
+}
+
+export const addNews = (news) => {
+  return dispatch => {
+    dispatch(addNewNews(news));
   }
 }
 
@@ -41,6 +48,11 @@ export const signin = (objUser) => {
       })
   }
 }
+
+const addNewNews = (news) => ({
+  type: ADD_NEWS,
+  payload: news
+})
 
 const signinSuccess = (articles) => ({
   type: SIGN_IN_SUCCESS,
