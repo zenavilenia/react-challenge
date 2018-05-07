@@ -15,7 +15,7 @@ export const signup = (objUser) => {
         console.log(response)
         const {email, password} = response.data.data;
         console.log(`email: ${email}, password: ${password}`)
-        alert('Register success!')
+        dispatch(signin(objUser))
       })
       .catch(err => {
         alert('Register failed!')
